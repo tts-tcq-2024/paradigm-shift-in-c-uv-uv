@@ -38,11 +38,15 @@ int batteryIsOk(float temperature, float soc, float chargeRate) {
   int temp_1 = 0;
   int temp_2 = 0;
   int temp_3 = 0;
-
+  int temp_4 = 0;
   temp_1 = temperatureIsOk(temperature);
   temp_2 = socIsOk(soc);
   temp_3 = chargeRateIsOk(chargeRate); 
-  return (temp_1+temp_2+temp_3);
+  temp_4 = temp_1+temp_2+temp_3;
+  if (temp_4 >1)
+  {return 1;}
+  else
+  {return 0;}
 
 }
 
