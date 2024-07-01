@@ -35,10 +35,10 @@ int chargeRateIsOk(float chargeRate)
 }
 
 int batteryIsOk(float temperature, float soc, float chargeRate) {
-  if ((temperatureIsOk(temperature) + socIsOk(soc) + chargeRateIsOk(chargeRate) ) < 1)
-  {return 0;}
-  else
+  if ((temperatureIsOk(temperature) + socIsOk(soc) + chargeRateIsOk(chargeRate) ) > 0)
   {return 1;}
+  else
+  {return 0;}
 }
 
 int main() {
