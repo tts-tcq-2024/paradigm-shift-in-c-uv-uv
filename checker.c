@@ -46,10 +46,20 @@ int isValueGreaterThan(float value, float threshold)
     return (value > threshold);
 }
 
+int isLowWarning(float value, float lowerLimit, float lowerWarning) 
+{
+    return value >= lowerLimit && value <= lowerWarning;
+}
+
+int isHighWarning(float value, float upperWarning, float upperLimit) 
+{
+    return value >= upperWarning && value <= upperLimit;
+}
+
 int isTemperatureWarning(float temperature)
 {
-    int tempLowWarning = temperature >= temperatureLimits.lowerLimit && temperature <= temperatureLimits.lowerWarning;
-    int tempHighWarning = temperature >= temperatureLimits.upperWarning && temperature <= temperatureLimits.upperLimit;
+    int tempLowWarning = isLowWarning(temperature, temperatureLimits.lowerLimit, temperatureLimits.lowerWarning);
+    int tempHighWarning = isHighWarning(temperature, temperatureLimits.upperWarning, temperatureLimits.upperLimit);
     int tempWarning = tempLowWarning || tempHighWarning;
     logWarning(tempWarning, "Temperature");
     return tempWarning;
@@ -61,15 +71,15 @@ int IstemperatureOk(float temperature)
   {
     return 1;
   }
-  int tempOk = !isValueOutOfRange(temperature, 0, 45);
+  int tempOk = !isValueOutOfRange(temperature, temperatureLimits.lowerLimit, temperatureLimits.upperLimit);
   logStatus(tempOk, "Temperature");
   return tempOk;
 }
 
 int isSocWarning(float soc)
 {
-    int socLowWarning = soc >= socLimits.lowerLimit && soc <= socLimits.lowerWarning;
-    int socHighWarning = soc >= socLimits.upperWarning && soc <= socLimits.upperLimit;
+    int socLowWarning = isLowWarning(soc, socLimits.lowerLimit, socLimits.lowerWarning);
+    int socHighWarning = isHighWarning(soc, socLimits.upperWarning, socLimits.upperLimit);
     int socWarning = socLowWarning || socHighWarning;
     logWarning(socWarning, "State of Charge");
     return socWarning;
@@ -77,17 +87,17 @@ int isSocWarning(float soc)
 
 int IsSocOk(float soc)
 {
-   if (isSocWarning(soc))
-   {
-    return 1;
-   }
-  int socOk = !isValueOutOfRange(soc, 20, 80);
+  if (isSocWarning(soc))
+  {
+  return 1;
+  }
+  int socOk = !isValueOutOfRange(soc, socLimits.lowerLimit, socLimits.upperLimit);
   logStatus(socOk, "State of Charge");
   return socOk;
 }
 
 int isChargeRateWarning(float chargeRate) {
-    int chargeRateWarning = chargeRate >= chargeRateLimits.upperWarning && chargeRate <= chargeRateLimits.upperLimit;
+    int chargeRateWarning = isHighWarning(chargeRate, chargeRateLimits.upperWarning, chargeRateLimits.upperLimit);
     logWarning(chargeRateWarning, "Charge Rate");
     return chargeRateWarning;
 }
@@ -98,7 +108,7 @@ int IschargeRateOk(float chargeRate)
   {
     return 1;
   }
-  int chargeRateOk = !isValueGreaterThan(chargeRate, 0.8);
+  int chargeRateOk = !isValueGreaterThan(chargeRate, chargeRateLimits.upperLimit);
   logStatus(chargeRateOk, "Charge Rate");
   return chargeRateOk;
 }
