@@ -4,6 +4,7 @@
 #include "Parameter_limits.h"
 
 extern ParameterLimits temperatureLimits;
+ParameterLimits temperatureLimits = {0, 45, 2.25, 42.75};
 
 int isTemperatureWarning(float temperature)
 {
