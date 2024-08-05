@@ -1,5 +1,6 @@
 #include <assert.h>
 #include "BatteryChecks.h"
+#include <stdio.h>
 
 void testTemperatureOutOfRange() {
     printf("Test: Temperature is out of range, SoC and Charge Rate are within range\n");
