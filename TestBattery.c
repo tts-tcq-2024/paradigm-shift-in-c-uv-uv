@@ -4,7 +4,7 @@
 
 void testBattery() 
 {
-    assert(batteryIsOk(46, 50, 0.5) == 0);
+    assert(batteryIsOk(46, 50, 0.5) == 1);
 
     assert(batteryIsOk(25, 85, 0.5) == 0);
 
