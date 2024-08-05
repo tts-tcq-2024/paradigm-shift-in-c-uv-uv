@@ -10,6 +10,7 @@ int isTemperatureWarning(float temperature)
     int tempLowWarning = isLowWarning(temperature, temperatureLimits.lowerLimit, temperatureLimits.lowerWarning);
     int tempHighWarning = isHighWarning(temperature, temperatureLimits.upperWarning, temperatureLimits.upperLimit);
     int tempWarning = tempLowWarning || tempHighWarning;
+    printf("temp warning is %d   %d  %d \n",tempLowWarning, tempHighWarning,tempWarning );
     logWarning(tempWarning, "Temperature");
     return tempWarning;
 }
