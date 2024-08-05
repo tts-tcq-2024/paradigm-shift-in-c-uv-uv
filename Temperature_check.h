@@ -2,6 +2,6 @@
 #define TEMPERATURE_CHECKS_H
 
 int isTemperatureWarning(float temperature);
-int IsTemperatureOk(float temperature);
+int IstemperatureOk(float temperature);
 
 #endif 

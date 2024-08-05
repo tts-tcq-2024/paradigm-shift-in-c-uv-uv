@@ -2,6 +2,7 @@
 #include "Logging_status.h"
 #include "Parameter_utilities.h"
 #include "Parameter_limits.h"
+#include <stdio.h>
 
 extern ParameterLimits temperatureLimits;
 ParameterLimits temperatureLimits = {0, 45, 2.25, 42.75};
