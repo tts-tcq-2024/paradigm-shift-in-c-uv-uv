@@ -3,6 +3,8 @@
 #include "Parameter_limits.h"
 #include "SocChecks.h"
 
+extern ParameterLimits socLimits;
+
 int isSocWarning(float soc)
 {
     int socLowWarning = isLowWarning(soc, socLimits.lowerLimit, socLimits.lowerWarning);

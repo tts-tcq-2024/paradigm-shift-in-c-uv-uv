@@ -3,6 +3,8 @@
 #include "Parameter_utilities.h"
 #include "Parameter_limits.h"
 
+extern ParameterLimits temperatureLimits;
+
 int isTemperatureWarning(float temperature)
 {
     int tempLowWarning = isLowWarning(temperature, temperatureLimits.lowerLimit, temperatureLimits.lowerWarning);

@@ -12,10 +12,10 @@ int isValueGreaterThan(float value, float threshold)
 
 int isLowWarning(float value, float lowerLimit, float lowerWarning) 
 {
-    return value >= lowerLimit && value <= lowerWarning;
+    return (value >= lowerLimit && value <= lowerWarning);
 }
 
 int isHighWarning(float value, float upperWarning, float upperLimit) 
 {
-    return value >= upperWarning && value <= upperLimit;
+    return (value >= upperWarning && value <= upperLimit);
 }

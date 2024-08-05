@@ -3,6 +3,9 @@
 #include "Parameter_limits.h"
 #include "ChargeRateChecks.h"
 
+
+extern ChargeRateLimits chargeRateLimits;
+
 int isChargeRateWarning(float chargeRate)
 {
     int chargeRateWarning = isHighWarning(chargeRate, chargeRateLimits.upperWarning, chargeRateLimits.upperLimit);
