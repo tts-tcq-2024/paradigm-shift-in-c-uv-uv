@@ -4,7 +4,7 @@
 
 void testTemperatureOutOfRange() {
     printf("Test: Temperature is out of range, SoC and Charge Rate are within range\n");
-    assert(batteryIsOk(46, 50, 0.5) == 1);
+    assert(batteryIsOk(46, 50, 0.5) == 0);
 }
 
 void testSocOutOfRange() {
