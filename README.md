@@ -17,7 +17,7 @@ Electric Vehicles have BMS - Battery Management Systems
 ## Possible purpose
 
 - Protect batteries while charging:
-at home, in public place, within vehicle / regenerative braking
+  at home, in public place, within vehicle / regenerative braking
 - Estimate life, inventory and supply chains
 
 ## The Starting Point
@@ -32,12 +32,12 @@ We will explore the charging phase of Li-ion batteries to start with.
 ## Tasks
 
 1. Reduce the cyclomatic complexity.
-1. Separate pure functions from I/O
-1. Avoid duplication - functions that do nearly the same thing
-1. Complete the tests - cover all conditions.
-1. To take effective action, we need to know
-the abnormal measure and the breach -
-whether high or low. Add this capability.
+2. Separate pure functions from I/O
+3. Avoid duplication - functions that do nearly the same thing
+4. Complete the tests - cover all conditions.
+5. To take effective action, we need to know
+   the abnormal measure and the breach -
+   whether high or low. Add this capability.
 
 ## The Exploration
 
@@ -59,3 +59,23 @@ Shorten the Semantic distance
 - Functional to express relation between input and output
 - Object oriented to encapsulate state with actions
 - Apect oriented to capture repeating aspects
+
+## Code Extension
+
+The below extension has been choosen to update the legacy code
+
+
+### Extension 1: Early Warning
+
+[](https://github.com/tts-tcq-2024/assignments/blob/main/paradigm-shift-extend.md#extension-1-early-warning)
+
+Customers need *early warnings* to take action, in addition to the alarm that you print after the limit is breached. Introduce a 'warning' level with a tolerance of 5% of the upper-limit.
+
+Example: If the SoC needs to be between 20 and 80, the warning-tolerance is `5% of 80` = `4`. Warnings need to be displayed in these ranges:
+
+* `20` to `20+4` Warning: Approaching discharge
+* `80-4` to `80` Warning: Approaching charge-peak
+
+Same for Temperature and Charge-rate.
+
+Keep in mind: Though we are starting with warning levels for all parameters, customers may give feedback to have warnings only for *some* parameters and not others. Minimize the change needed for such 'tuning'.
