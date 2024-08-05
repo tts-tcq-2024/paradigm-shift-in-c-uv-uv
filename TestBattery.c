@@ -2,53 +2,66 @@
 #include "BatteryChecks.h"
 #include <stdio.h>
 
-void testTemperatureOutOfRange() {
-    printf("Test: Temperature is out of range, SoC and Charge Rate are within range\n");
-    assert(batteryIsOk(46, 50, 0.5) == 0);
-}
-
-void testSocOutOfRange() {
-    printf("Test: Temperature is within range, SoC is out of range, Charge Rate is within range\n");
-    assert(batteryIsOk(25, 85, 0.5) == 0);
-}
-
-void testChargeRateOutOfRange() {
-    printf("Test: Temperature is within range, SoC is within range, Charge Rate is out of range\n");
-    assert(batteryIsOk(25, 70, 0.9) == 0);
-}
 
 void testAllParametersWithinRange() {
     printf("Test: All parameters are within range\n");
     assert(batteryIsOk(25, 70, 0.5) == 1);
 }
 
-void testAllParametersOutOfRange() {
-    printf("Test: All parameters are out of range\n");
-    assert(batteryIsOk(-1, 85, 0.9) == 0);
+void testTemperatureLowBreach() {
+    printf("Test: Temperature is below the lower limit\n");
+    assert(batteryIsOk(-1, 50, 0.5) == 0);
 }
 
-void testTemperatureAtUpperWarningLimit() {
-    printf("Test: Temperature is just at the upper warning limit\n");
-    assert(batteryIsOk(42.75, 70, 0.5) == 1);
+void testTemperatureHighBreach() {
+    printf("Test: Temperature is above the upper limit\n");
+    assert(batteryIsOk(46, 50, 0.5) == 0);
 }
 
-void testSocAtLowerWarningLimit() {
-    printf("Test: SoC is just at the lower warning limit\n");
-    assert(batteryIsOk(25, 24, 0.5) == 1);
+void testSocLowBreach() {
+    printf("Test: SOC is below the lower limit\n");
+    assert(batteryIsOk(25, 19, 0.5) == 0);
 }
 
-void testChargeRateAtUpperWarningLimit() {
-    printf("Test: Charge Rate is just at the upper warning limit\n");
-    assert(batteryIsOk(25, 70, 0.76) == 1);
+void testSocHighBreach() {
+    printf("Test: SOC is above the upper limit\n");
+    assert(batteryIsOk(25, 85, 0.5) == 0);
+}
+
+void testChargeRateHighBreach() {
+    printf("Test: Charge rate is above the upper limit\n");
+    assert(batteryIsOk(25, 50, 0.9) == 0);
+}
+
+void testAllParametersAtLowerLimit() {
+    printf("Test: All parameters are at the lower limit\n");
+    assert(batteryIsOk(0, 20, 0.8) == 1);
+}
+
+void testAllParametersAtUpperLimit() {
+    printf("Test: All parameters are at the upper limit\n");
+    assert(batteryIsOk(45, 80, 0.8) == 1);
+}
+
+void testNormalConditions1() {
+    printf("Test: Normal conditions case 1\n");
+    assert(batteryIsOk(5, 25, 0.3) == 1);
+}
+
+void testChargeRateSlightlyAboveLimit() {
+    printf("Test: Charge rate is slightly above the upper limit\n");
+    assert(batteryIsOk(45, 80, 0.85) == 0);
 }
 
 void testBattery() {
-    testTemperatureOutOfRange();
-    testSocOutOfRange();
-    testChargeRateOutOfRange();
     testAllParametersWithinRange();
-    testAllParametersOutOfRange();
-    testTemperatureAtUpperWarningLimit();
-    testSocAtLowerWarningLimit();
-    testChargeRateAtUpperWarningLimit();
+    testTemperatureLowBreach();
+    testTemperatureHighBreach();
+    testSocLowBreach();
+    testSocHighBreach();
+    testChargeRateHighBreach();
+    testAllParametersAtLowerLimit();
+    testAllParametersAtUpperLimit();
+    testNormalConditions1();
+    testChargeRateSlightlyAboveLimit();
 }
