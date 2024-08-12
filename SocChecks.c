@@ -11,15 +11,11 @@ int isSocWarning(float soc)
     int socHighWarning = isHighWarning(soc, socLimits.upperWarning, socLimits.upperLimit);
     int socWarning = socLowWarning || socHighWarning;
     logWarning(socWarning, "State of Charge");
-    return socWarning;
 }
 
 int IsSocOk(float soc)
 {
-  if (isSocWarning(soc))
-  {
-  return 1;
-  }
+  isSocWarning(soc);
   int socOk = !isValueOutOfRange(soc, socLimits.lowerLimit, socLimits.upperLimit);
   logStatus(socOk, "State of Charge");
   return socOk;

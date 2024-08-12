@@ -15,10 +15,7 @@ int isChargeRateWarning(float chargeRate)
 
 int IschargeRateOk(float chargeRate)
 {
-  if (isChargeRateWarning(chargeRate))
-  {
-    return 1;
-  }
+  isChargeRateWarning(chargeRate);
   int chargeRateOk = !isValueGreaterThan(chargeRate, chargeRateLimits.upperLimit);
   logStatus(chargeRateOk, "Charge Rate");
   return chargeRateOk;
